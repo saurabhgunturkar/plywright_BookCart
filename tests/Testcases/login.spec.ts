@@ -5,7 +5,7 @@ test.describe('login module', async()=>{
         await page.goto("/")
     })
 
-    test('test1',async({page})=>{
+    test('test2',async({page})=>{
         console.log("signup test")
     })
 
