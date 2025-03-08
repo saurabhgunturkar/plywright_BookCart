@@ -1,0 +1,17 @@
+{
+  "name": "plywright_bookcart",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "runtest": "npx playwright test",
+    "showreport": "npx playwright show-report"
+  },
+  "keywords": [],
+  "author": "Saurabh Gunturkar",
+  "license": "ISC",
+  "description": "A selfmade testing project",
+  "devDependencies": {
+    "@playwright/test": "^1.50.1",
+    "@types/node": "^22.13.4"
+  }
+}
