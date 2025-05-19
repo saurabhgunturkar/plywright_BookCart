@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "runtest": "npx playwright test",
+    "test:ED": "npx playwright test Testcases/ExampleDomain.spec.ts --project=chromium --headed",
     "showreport": "npx playwright show-report"
   },
   "keywords": [],

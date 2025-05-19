@@ -1,0 +1,83 @@
+
+## Types of Annotaations ##
+
+1. In Groups
+
+test.describe('two annotated tests', {
+  annotation: {
+    type: 'issue',
+    description: 'https://github.com/microsoft/playwright/issues/23180',
+  },
+},
+
+2. In Tests 
+
+test.info().annotations.push({ type: 'issue', description: 'https://github.com/microsoft/playwright/issues/23180' });
+
+>> Types >> issue --> Linking issues
+         >> feature --> Tracking the feature
+         >> flaky --> Marking Unstable Tests (Fails Intermittently in browserName)
+         >> skip --> Skipping Test Due to Known Issues
+         >> owner --> Assign test responsibility in description
+=========================================================================================================
+
+## Runs Test In Parallel/serial ###
+
+1. // Run all the tests in the file concurrently using parallel workers.
+        test.describe.configure({ mode: 'parallel' });
+        test('runs in parallel 1', async ({ page }) => {});
+        test('runs in parallel 2', async ({ page }) => {});
+
+2. // Tests in this file run in order. Retries, if any, run independently 
+   // Use 'FullyParallel:true' configuration in playwirght.config.ts
+        test.describe.configure({ mode: 'default' });
+        test('runs first', async ({ page }) => {});
+        test('runs second', async ({ page }) => {});
+
+3. // Annotate tests as inter-dependent.
+        test.describe.configure({ mode: 'serial' });
+
+// Each test in the file will be retried twice (runs twice each testcase) and have a timeout of 20 seconds for all tests.
+        test.describe.configure({ retries: 2, timeout: 20_000 });
+        test('runs first', async ({ page }) => {});
+        test('runs second', async ({ page }) => {});
+
+===================================================================================================
+
+### Test Describe Methods ###
+
+        test.describe.methodName(()=>{})
+
+1. fixme() >> Highlight the not running test which fix it 
+2. only() >> runs only that testcase
+3. Skip() >> skip the test Groups
+4. parallel() >> parallely execute the tests inside it
+5. serial() >> serially execute tests inside it
+
+
+===================================================================================================
+
+Async and Await 
+
+- both used for handling Asynchronious fucntion
+Async >> declear that function which always return the promise 
+      >> allow to use Await inside In it 
+
+Await >> used inside Async function
+      >> pauses the execution until promise gets resolved 
+
+===================================================================================================
+### TestExecution with Iframes ###
+
+import { test, expect } from '@playwright/test';
+
+test('Interact with elements inside an iframe', async ({ page }) => {
+    await page.goto('https://example.com'); // Replace with your URL
+
+    // Locate the iframe and get its content
+    const iframe = await page.frameLocator('iframe#myIframe'); // Replace with actual iframe selector
+
+    // Perform actions inside the iframe
+    await iframe.locator('button#submit').click(); // Click inside the iframe
+    await expect(iframe.locator('p#message')).toHaveText('Success'); // Assertion inside iframe
+});
