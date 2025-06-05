@@ -16,7 +16,7 @@ test('Verify Book Details', async ({ request }) => {
     const expectedData = JSON.parse(fs.readFileSync('booklist.json', 'utf-8'));
 
     for (const book of expectedData) {
-        const apiBook = apiData.find((b) => b.bookId === book.bookId);
+        const apiBook = apiData.find((b: { bookId: any; }) => b.bookId === book.bookId);
         expect(apiBook?.title).toBe(book.title);
         expect(apiBook?.author).toBe(book.author);
         expect(apiBook?.category).toBe(book.category);

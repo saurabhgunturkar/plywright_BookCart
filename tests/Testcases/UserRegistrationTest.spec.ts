@@ -1,7 +1,7 @@
 import test from "playwright/test";
-import { HomepPage } from "../Page_Objects/HomePage";
-import { LoginPage } from "../Page_Objects/LoginPage";
-import { RegisterPage } from "../Page_Objects/RegisterPage";
+import { HomepPage } from "../pages/HomePage";
+import { LoginPage } from "../pages/LoginPage";
+import { RegisterPage } from "../pages/RegisterPage";
 
 
 test.describe('User Registration Test Suite', () => {

@@ -1,14 +1,17 @@
 import test from "@playwright/test";
-import { CartPage } from "../Page_Objects/CartPage";
-import { CheckoutPage } from "../Page_Objects/CheckoutPage";
-import { HomepPage } from "../Page_Objects/HomePage";
-import { LoginPage } from "../Page_Objects/LoginPage";
-import { RegisterPage } from "../Page_Objects/RegisterPage";
-import { SearchedProductPage } from "../Page_Objects/SearchedProductPage";
+
+import { CartPage } from "../pages/CartPage";
+import { CheckoutPage } from "../pages/CheckoutPage";
+import { HomepPage } from "../pages/HomePage";
+import { LoginPage } from "../pages/LoginPage";
+import { RegisterPage } from "../pages/RegisterPage";
+import { SearchedProductPage } from "../pages/SearchedProductPage";
+
 
 test.describe("E2E Test Suite", () => {
     test.beforeEach(async ({ page }) => {
         await page.goto("/");
+        
     });
 
     test("E2E Test", async ({ page }) => {

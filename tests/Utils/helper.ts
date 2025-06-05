@@ -3,7 +3,6 @@ import { BrowserContext, Page } from "playwright/test";
 
 export class Helper {  
 
-    private page:Page;
 
     
 
