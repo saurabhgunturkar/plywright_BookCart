@@ -1,6 +1,6 @@
 import { defineConfig, devices } from "playwright/test";
 
-const baseURL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'https://bookcart.azurewebsites.ne/';
+const baseURL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'https://bookcart.azurewebsites.net/';
 
 export default defineConfig({
   testDir: './tests/test',
