@@ -1,5 +1,6 @@
 import { defineConfig, devices } from "playwright/test";
 
+const baseURL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'https://bookcart.azurewebsites.ne/';
 
 export default defineConfig({
   testDir: './tests/test',
@@ -20,7 +21,8 @@ export default defineConfig({
   use: {
     screenshot:"only-on-failure",
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'https://bookcart.azurewebsites.net/',
+    // baseURL: 'https://bookcart.azurewebsites.net/',
+    baseURL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
