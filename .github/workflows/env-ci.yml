@@ -9,7 +9,6 @@ name: ENV-CI/CD_Test
   #     - main
 
 on:
-  workflow_dispatch:
   schedule:
   - cron: '*/5 * * * *'
     
