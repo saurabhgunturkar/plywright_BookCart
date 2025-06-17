@@ -34,7 +34,7 @@ jobs:
               run: npx playwright install --with-deps
       
             - name: Run tests
-              run: npx playwright test --grep ${{ github.event.inputs.tag }} 
+              run: npx playwright test --grep ${{ github.event.inputs.tag }} --project="chromium"
 
             - name: Upload Playwright report
               uses: actions/upload-artifact@v4
