@@ -1,0 +1,183 @@
+name: CICD
+
+on:
+        # push:
+        #         branches:
+        #         - main
+        # pull_request:
+        #         branches:
+        #         - main
+        workflow_dispatch:
+
+jobs:
+    test:
+        name: Run Tests
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                node-version: '18'
+        
+            - name: Install dependencies
+              run: npm ci
+        
+            - name: Install Playwright browsers
+              run: npx playwright install --with-deps
+        
+            - name: Run tests
+              run: npx playwright test
+
+    os-browser:
+                needs: test
+                name: browser compatibility checks
+                strategy:
+                    matrix:
+                        os: [ubuntu-latest, windows-latest, macos-latest]
+                        browser: [chromium, firefox, webkit]
+                runs-on: ${{ matrix.os }}
+                steps:
+                    - name: Set up ${{ matrix.os }} with ${{ matrix.browser }}
+                      run: echo "Setting up environment for ${{ matrix.os }} with ${{ matrix.browser }} browser"
+                    - name: Checkout code
+                      uses: actions/checkout@v4
+                    - name: Set up Node.js
+                      uses: actions/setup-node@v4
+                      with:
+                        node-version: '18'
+                    - name: Install dependencies
+                      run: npm ci
+                    - name: Install Playwright browsers
+                      run: npx playwright install --with-deps
+                    - name: Run Playwright tests
+                      run: npx playwright test --project="${{ matrix.browser }}"
+    
+    devices:
+                        name: Run Tests on Devices
+                        needs: test
+                        strategy:
+                            matrix:
+                                devices: [Iphone 15 pro max, Ipad 11 pro]
+                        runs-on: macos-latest
+                        steps:
+                            - name: "Set up ${{matrix.devices}}"
+                              run: echo "Setting up environment for ${{matrix.devices}} device "
+                            - name: Checkout code
+                              uses: actions/checkout@v4
+                            - name: Set up Node.js
+                              uses: actions/setup-node@v4
+                              with:
+                                node-version: '18'
+                            - name: Install dependencies
+                              run: npm ci
+                            - name: Install Playwright browsers
+                              run: npx playwright install --with-deps
+                            - name: Run Playwright tests
+                              run: npx playwright test --project="${{ matrix.devices }}"
+
+    test-env:
+                                needs: [os-browser, devices]
+                                name: Run Tests in Test Environment
+                                runs-on: ubuntu-latest
+                                environment: Test
+                            
+                                env:
+                                  PLAYWRIGHT_TEST_BASE_URL: https://bookcart.azurewebsites.net/
+                            
+                                steps:
+                                  - name: Checkout repository
+                                    uses: actions/checkout@v4
+                            
+                                  - name: Set up Node.js
+                                    uses: actions/setup-node@v4
+                                    with:
+                                      node-version: 'lts/*'
+                            
+                                  - name: Cache Node.js modules
+                                    uses: actions/cache@v4
+                                    with:
+                                      path: ~/.npm
+                                      key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+                                      restore-keys: |
+                                        ${{ runner.os }}-node-
+                            
+                                  - name: Install dependencies
+                                    run: npm ci
+                            
+                                  - name: Cache Playwright browsers
+                                    uses: actions/cache@v4
+                                    with:
+                                      path: ~/.cache/ms-playwright
+                                      key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
+                                      restore-keys: |
+                                        ${{ runner.os }}-playwright-
+                            
+                                  - name: Install Playwright browsers
+                                    run: npx playwright install --with-deps
+                            
+                                  - name: Run Playwright tests
+                                    run: npx playwright test
+                            
+                                  - name: Upload Playwright report
+                                    uses: actions/upload-artifact@v4
+                                    if: ${{ !cancelled() }}
+                                    with:
+                                      name: playwright-report-${{ github.job }}
+                                      path: playwright-report/
+                                      retention-days: 30
+                            
+    stage-env:
+                                name: Run Tests in Stage Environment
+                                runs-on: ubuntu-latest
+                                environment: Stage
+                                needs: test-env
+                            
+                                env:
+                                  PLAYWRIGHT_TEST_BASE_URL: https://bookcart.azurewebsites.net/
+                            
+                                steps:
+                                  - name: Checkout repository
+                                    uses: actions/checkout@v4
+                            
+                                  - name: Set up Node.js
+                                    uses: actions/setup-node@v4
+                                    with:
+                                      node-version: 'lts/*'
+                            
+                                  - name: Cache Node.js modules
+                                    uses: actions/cache@v4
+                                    with:
+                                      path: ~/.npm
+                                      key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+                                      restore-keys: |
+                                        ${{ runner.os }}-node-
+                            
+                                  - name: Install dependencies
+                                    run: npm ci
+                            
+                                  - name: Cache Playwright browsers
+                                    uses: actions/cache@v4
+                                    with:
+                                      path: ~/.cache/ms-playwright
+                                      key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
+                                      restore-keys: |
+                                        ${{ runner.os }}-playwright-
+                            
+                                  - name: Install Playwright browsers
+                                    run: npx playwright install --with-deps
+                            
+                                  - name: Run Playwright tests
+                                    run: npx playwright test
+                            
+                                  - name: Upload Playwright report
+                                    uses: actions/upload-artifact@v4
+                                    if: ${{ !cancelled() }}
+                                    with:
+                                        name: playwright-report-${{ github.job }}
+                                        path: playwright-report/
+                                        retention-days: 30
+                            
+            
+        
