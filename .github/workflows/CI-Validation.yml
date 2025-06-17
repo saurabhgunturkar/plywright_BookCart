@@ -1,4 +1,4 @@
-name: CI validation
+name: CI_Validation
 on:
   push:
     branches: [main, master]
@@ -8,7 +8,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

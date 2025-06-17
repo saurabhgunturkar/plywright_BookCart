@@ -1,4 +1,4 @@
-name: Cross-Environment Compatibility Matrix
+name: Compatibility_Checks
 
 on:
     workflow_dispatch:
