@@ -52,6 +52,7 @@ test.describe("E2E Test Suite", () => {
             const loginSuccessElement = page.locator('//span[@class="mdc-button__label"]/span').first();
             await loginSuccessElement.waitFor({ timeout: 5000 });
             await page.screenshot({ path: "screenshots/SuccessLogin.png" });
+    
         });
 
         await test.step("Search for the book -> Rot & Ruin", async () => {

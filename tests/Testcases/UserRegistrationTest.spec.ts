@@ -22,7 +22,7 @@ test.describe('User Registration Test Suite', () => {
         await registerpage.enterFirstName('Sam');
         await registerpage.enterLastName('Doe');
         await page.waitForTimeout(100);
-        await registerpage.enterUsername('samdoe1234567');
+        await registerpage.enterUsername('samdoe1234554567');
         await page.waitForTimeout(100);
         await registerpage.enterPassword('Samdeo@123');
         await page.waitForTimeout(100);
