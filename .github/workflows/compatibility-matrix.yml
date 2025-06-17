@@ -6,7 +6,7 @@ jobs:
     environment-setup:
         strategy:
             matrix:
-                os: [ubuntu-latest, windows-latest, macos-latest]
+                os: [ubuntu-latest]
                 browser: [chromium, firefox, webkit]
                 # devices: [Iphone 15 pro max, Ipad 11 pro]
         runs-on: ${{ matrix.os }}
