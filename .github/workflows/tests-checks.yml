@@ -15,9 +15,11 @@ on:
                     - sanity
 
 jobs:
-    run-tests:
+    tests:
         runs-on: ubuntu-latest
         steps:
+            - name: ${{ github.event.inputs.tag }} Tests
+              run: echo "Running ${{ github.event.inputs.tag }} tests"
             - name: Checkout code
               uses: actions/checkout@v4
             - name: Set up Node.js
@@ -32,8 +34,8 @@ jobs:
               run: npx playwright install --with-deps
       
             - name: Run tests
-              run: npx playwright test --greps ${{ github.event.inputs.tag }} 
-              
+              run: npx playwright test --grep ${{ github.event.inputs.tag }} 
+
             - name: Upload Playwright report
               uses: actions/upload-artifact@v4
               if: ${{ !cancelled() }}

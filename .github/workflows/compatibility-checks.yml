@@ -3,7 +3,7 @@ name: Compatibility_Checks
 on:
     workflow_dispatch:
 jobs:
-    setup:
+    os-browser:
         strategy:
             matrix:
                 os: [ubuntu-latest, windows-latest, macos-latest]
@@ -25,7 +25,7 @@ jobs:
             - name: Run Playwright tests
               run: npx playwright test --project="${{ matrix.browser }}"
     devices:
-        needs: setup
+        needs: os-browser
         strategy:
             matrix:
                 devices: [Iphone 15 pro max, Ipad 11 pro]
