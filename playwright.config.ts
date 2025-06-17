@@ -35,38 +35,38 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome']},
     },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox']},
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari']},
-    },
-    {
-      name: 'Iphone 14',
-      use: { ...devices['iPhone 14']},
-    },
-    {
-      name: 'Mobile Firefox',
-      use: { ...devices['Pixel 5']},
-    },
-    {
-      name: 'Mobile Chrome',
-      use: { ...devices['Pixel 5']},
-    },
-    {
-      name: 'Mobile Chrome',
-      use: { ...devices['Pixel 5'] },
-    },
-    {
-      name: 'Iphone 15 pro max',
-      use: { ...devices['iPhone 15 Pro Max'] },
-    },
-    {
-      name:'Ipad 11 pro',
-      use: {...devices['iPad Pro 11']}
-    }
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox']},
+    // },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari']},
+    // },
+    // {
+    //   name: 'Iphone 14',
+    //   use: { ...devices['iPhone 14']},
+    // },
+    // {
+    //   name: 'Mobile Firefox',
+    //   use: { ...devices['Pixel 5']},
+    // },
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: { ...devices['Pixel 5']},
+    // },
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: { ...devices['Pixel 5'] },
+    // },
+    // {
+    //   name: 'Iphone 15 pro max',
+    //   use: { ...devices['iPhone 15 Pro Max'] },
+    // },
+    // {
+    //   name:'Ipad 11 pro',
+    //   use: {...devices['iPad Pro 11']}
+    // }
     
 
 
