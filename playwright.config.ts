@@ -59,14 +59,14 @@ export default defineConfig({
     //   name: 'Mobile Chrome',
     //   use: { ...devices['Pixel 5'] },
     // },
-    // {
-    //   name: 'Iphone 15 pro max',
-    //   use: { ...devices['iPhone 15 Pro Max'] },
-    // },
-    // {
-    //   name:'Ipad 11 pro',
-    //   use: {...devices['iPad Pro 11']}
-    // }
+    {
+      name: 'Iphone 15 pro max',
+      use: { ...devices['iPhone 15 Pro Max'] },
+    },
+    {
+      name:'Ipad 11 pro',
+      use: {...devices['iPad Pro 11']}
+    }
     
 
 
