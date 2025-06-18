@@ -32,7 +32,7 @@ jobs:
 
     os-browser:
                 needs: test
-                name: browser compatibility checks
+                # name: browser compatibility checks
                 strategy:
                     matrix:
                         os: [ubuntu-latest, windows-latest, macos-latest]
@@ -55,7 +55,7 @@ jobs:
                       run: npx playwright test --project="${{ matrix.browser }}"
     
     devices:
-                        name: Run Tests on Devices
+                        # name: Run Tests on Devices
                         needs: test
                         strategy:
                             matrix:
