@@ -180,18 +180,12 @@ jobs:
                                         retention-days: 30
 
     build-run-push: 
-                                            name: Build, Run, and Push Docker Image
                                             needs: [test-env, stage-env]
+                                            name: Deploy Docker Image
                                             runs-on: ubuntu-latest
-                                        
-                                            steps:
-                                              - name: Set IST date and time variables
-                                                run: |
-                                                    IST_DATE=$(TZ="Asia/Kolkata" date +'%Y%m%d')
-                                                    IST_TIME=$(TZ="Asia/Kolkata" date +'%H%M%S')
-                                                    echo "DATE=$IST_DATE" >> $GITHUB_ENV
-                                                    echo "TIME=$IST_TIME" >> $GITHUB_ENV
+                                            environment: Deploy
 
+                                            steps:
                                               - name: Checkout repository
                                                 uses: actions/checkout@v3
                                         
@@ -205,13 +199,13 @@ jobs:
                                                   password: ${{ secrets.DOCKER_PASSWORD }}
                                         
                                               - name: Build Docker image
-                                                run: docker build -t ${{ secrets.DOCKER_USERNAME }}/pw-bookcart-tests:${env.DATE}-${env.TIME} .
+                                                run: docker build -t ${{ secrets.DOCKER_USERNAME }}/pw-bookcart-tests:latest .
                                         
                                               - name: Run Docker container
-                                                run: docker run --rm ${{ secrets.DOCKER_USERNAME }}/pw-bookcart-tests:${env.DATE}-${env.TIME}
+                                                run: docker run --rm ${{ secrets.DOCKER_USERNAME }}/pw-bookcart-tests:latest
                                         
                                               - name: Push Docker image to Docker Hub
-                                                run: docker push ${{ secrets.DOCKER_USERNAME }}/pw-bookcart-tests:${env.DATE}-${env.TIME}
+                                                run: docker push ${{ secrets.DOCKER_USERNAME }}/pw-bookcart-tests:latest
                                         
                             
             
