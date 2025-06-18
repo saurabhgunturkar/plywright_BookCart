@@ -1,4 +1,4 @@
-name: Build and Run Docker Image
+name: Build, Run, and Push Docker Image
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-run:
+  build-run-push:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t pw-bookcart-tests .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/pw-bookcart-tests:latest .
 
       - name: Run Docker container
-        run: docker run --rm pw-bookcart-tests
+        run: docker run --rm ${{ secrets.DOCKER_USERNAME }}/pw-bookcart-tests:latest
+
+      - name: Push Docker image to Docker Hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/pw-bookcart-tests:latest
