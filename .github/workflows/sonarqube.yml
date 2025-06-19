@@ -31,7 +31,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests + collect coverage
-        run: npm test
+        run: npx playwright test
         env:
           CI: 'true'
 
