@@ -12,7 +12,7 @@ test.describe("User Registration", () => {
 
     test("should visible the firstname textfield ", async () => {
         expect(registerPage.firstNameField).toBeDefined();
-        expect(await registerPage.firstNameField.isVisible({ timeout: 5000 })).toBeTruthy();
+        expect(await registerPage.firstNameField).toBeVisible({ timeout: 5000 });
         expect(await registerPage.firstNameField.isEnabled()).toBeTruthy();
     })
 
