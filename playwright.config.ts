@@ -15,7 +15,7 @@ export default defineConfig({
     screenshot:"only-on-failure",
     baseURL,
     trace: 'on-first-retry',
-    headless: false
+    headless: true
   },
 
   projects: [
