@@ -24,7 +24,9 @@
   },
   "dependencies": {
     "@azure/microsoft-playwright-testing": "^1.0.0-beta.7",
+    "axios": "^1.10.0",
     "dotenv": "^17.0.1",
+    "express": "^5.1.0",
     "protractor": "^3.3.0"
   }
 }
