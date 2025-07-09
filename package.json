@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "runtest": "npx playwright test",
+    "runtest": "npx playwright test --reporter=json --output=playwright-report",
     "test:ED": "npx playwright test Testcases/ExampleDomain.spec.ts --project=chromium --headed",
     "showreport": "npx playwright show-report",
     "test:regression": "npx playwright test tests/regressionTestRepo"

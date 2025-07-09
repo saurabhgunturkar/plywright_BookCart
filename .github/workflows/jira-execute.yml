@@ -37,7 +37,7 @@ jobs:
         run: chmod +x node_modules/.bin/playwright
           
       - name: Run Playwright tests
-        run: npx playwright test login.spec.ts --reporter=json --output=playwright-report
+        run: npm run runtest
           
       - name: Send results to JIRA
         env:
