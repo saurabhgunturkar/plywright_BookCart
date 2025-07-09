@@ -1,0 +1,44 @@
+testcase name,description,preconditions,test steps,test data,expected results,Test Status,priority
+Verify First Name field is visible and enabled,This test case verifies that the First Name text field is visible and enabled on the registration page.,User is on the registration page.,"1. Navigate to the registration page.
+2. Check if the First Name text field is visible.
+3. Check if the First Name text field is enabled.",N/A,The First Name text field should be visible and enabled.,Approved,High
+Verify error message for empty First Name,This test case verifies that an error message is displayed when the First Name field is left empty.,User is on the registration page.,"1. Navigate to the registration page.
+2. Click on the First Name text field.
+3. Click on the Last Name text field to move focus away.",N/A,An error message 'First Name is required' should be visible.,Approved,High
+Verify Last Name field is visible and enabled,This test case verifies that the Last Name text field is visible and enabled on the registration page.,User is on the registration page.,"1. Navigate to the registration page.
+2. Check if the Last Name text field is visible.
+3. Check if the Last Name text field is enabled.",N/A,The Last Name text field should be visible and enabled.,Approved,High
+Verify error message for empty Last Name,This test case verifies that an error message is displayed when the Last Name field is left empty.,User is on the registration page.,"1. Navigate to the registration page.
+2. Click on the Last Name text field.
+3. Click on the Username text field to move focus away.",N/A,An error message 'Last Name is required' should be visible.,Approved,High
+Verify Username field is visible and enabled,This test case verifies that the Username text field is visible and enabled on the registration page.,User is on the registration page.,"1. Navigate to the registration page.
+2. Check if the Username text field is visible.
+3. Check if the Username text field is enabled.",N/A,The Username text field should be visible and enabled.,Approved,High
+Verify error message for empty Username,This test case verifies that an error message is displayed when the Username field is left empty.,User is on the registration page.,"1. Navigate to the registration page.
+2. Click on the Username text field.
+3. Click on the Password text field to move focus away.",N/A,An error message 'User Name is required' should be visible.,Approved,High
+Verify error for existing username,This test case verifies that an error message is displayed when a user tries to register with an already existing username.,User is on the registration page. A user with the specified username already exists.,"1. Navigate to the registration page.
+2. Enter an existing username in the Username text field.
+3. Click on the Password text field.",Username: samdoe12345678032587,An error message 'User Name is not available' should be visible.,Approved,Medium
+Verify Password field is visible and enabled,This test case verifies that the Password text field is visible and enabled on the registration page.,User is on the registration page.,"1. Navigate to the registration page.
+2. Check if the Password text field is visible.
+3. Check if the Password text field is enabled.",N/A,The Password text field should be visible and enabled.,Approved,High
+Verify error message for empty Password,This test case verifies that an error message is displayed when the Password field is left empty.,User is on the registration page.,"1. Navigate to the registration page.
+2. Click on the Password text field.
+3. Click on the Confirm Password text field to move focus away.",N/A,An error message 'Password is required' should be visible.,Approved,High
+Verify error for password not meeting requirements,This test case verifies that an error message is displayed when the password does not meet the security requirements.,User is on the registration page.,"1. Navigate to the registration page.
+2. Enter a password that does not meet the requirements.
+3. Click on the Confirm Password text field.",Password: 12345,"An error message 'Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number' should be visible.",Approved,Medium
+Verify Confirm Password field is visible and enabled,This test case verifies that the Confirm Password text field is visible and enabled on the registration page.,User is on the registration page.,"1. Navigate to the registration page.
+2. Check if the Confirm Password text field is visible.
+3. Check if the Confirm Password text field is enabled.",N/A,The Confirm Password text field should be visible and enabled.,Approved,High
+Verify error message for empty Confirm Password,This test case verifies that an error message is displayed when the Confirm Password field is left empty.,User is on the registration page.,"1. Navigate to the registration page.
+2. Click on the Confirm Password text field.
+3. Click on the Register button.",N/A,An error message 'Password is required' should be visible.,Approved,High
+Verify error for password mismatch,This test case verifies that an error message is displayed when the password and confirm password do not match.,User is on the registration page.,"1. Navigate to the registration page.
+2. Enter a password in the Password field.
+3. Enter a different password in the Confirm Password field.
+4. Click on the Register button.","Password: [generated], Confirm Password: user1234",An error message 'Password do not match' should be visible.,Approved,High
+Verify successful user registration,This test case verifies that a user can successfully register with valid details.,User is on the registration page.,"1. Navigate to the registration page.
+2. Fill in all the required fields with valid data.
+3. Click on the Register button.",Valid user data (dynamically generated),A success message 'Registration successful' should be displayed.,Approved,Highest

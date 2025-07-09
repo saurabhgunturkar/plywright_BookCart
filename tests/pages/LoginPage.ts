@@ -11,7 +11,7 @@ export class LoginPage{
         this.registerBtn = page.getByRole('button', { name: 'Register' });
         this.usernameTextField = page.locator('input[placeholder="Username"]');
         this.passwordTextField = page.getByPlaceholder('Password');
-        this.loginBtn = page.getByRole('button',{name:'Login'});
+        this.loginBtn = page.locator('mat-card-content button[color="primary"]');
     }
 
     async clickRegisterButton(){
@@ -27,7 +27,7 @@ export class LoginPage{
     }
 
     async clickLoginButton(){
-        await this.loginBtn.last().click();
+        await this.loginBtn.click();
     }
 
 
