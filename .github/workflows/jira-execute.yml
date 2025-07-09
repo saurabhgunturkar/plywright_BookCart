@@ -43,6 +43,6 @@ jobs:
         env:
           JIRA_URL: "https://saurabhgunturkar07.atlassian.net/"
           JIRA_USER: "saurabhgunturkar07@gmail.com"
-          JIRA_API_TOKEN: "ATATT3xFfGF0W3LfL2g0DnrFHrB2roSRffhMBXUZCzXmje2Q73R21heVBMBGqDkj2lOeYi4GEW9Hg5T0DAQrb8qW1i9tYbVzrHhVxReRCaLdFCkH3AKVxJKa6b8MRXLaccipN2wcCjy4G5_ioEXFQ9--lqM1qUgOcvKZFN1a2Tg9N6OkUqzTGb8=95918BB2"
+          JIRA_API_TOKEN: "${{ secrets.JIRA_API_TOKEN }}"
           ISSUE_KEY: ${{ github.event.client_payload.issue_key }}
         run: node send-results-to-jira.js
