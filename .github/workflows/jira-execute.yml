@@ -11,7 +11,7 @@ jobs:
       - name: Print issue key
         env:
           ISSUE_KEY: ${{ github.event.client_payload.issue_key }}
-        run: echo "Issue key: $ISSUE_KEY"
+        run: echo "$ISSUE_KEY"
 
       - name: Fail if issue key is missing
         env:
