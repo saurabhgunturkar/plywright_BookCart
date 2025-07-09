@@ -3,70 +3,63 @@ import { defineConfig, devices } from "playwright/test";
 const baseURL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'https://bookcart.azurewebsites.net/';
 
 export default defineConfig({
-  testDir: './tests/test',
-  
-  /* Run tests in files in parallel */
+  testDir: './tests/BookCartApp/tests',
   fullyParallel: true,
-  
   globalTeardown:'./tests/Utils/global-teardown.ts',
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 2 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [['list'], ['html']],
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     screenshot:"only-on-failure",
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'https://bookcart.azurewebsites.net/',
     baseURL,
-
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    headless: true
+    headless: false
   },
 
-  /* Configure projects for major browsers */
   projects: [
+    
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome']},
+      use: { ...devices['Desktop Chrome'],
+      channel:'chrome',
+      
+      }
     },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox']},
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari']},
-    },
-    {
-      name: 'Iphone 14',
-      use: { ...devices['iPhone 14']},
-    },
+    
     // {
-    //   name: 'Mobile Firefox',
-    //   use: { ...devices['Pixel 5']},
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox']},
     // },
     // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5']},
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari']},
     // },
     // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
+    //   name: 'Iphone 14',
+    //   use: { ...devices['iPhone 14']},
     // },
-    {
-      name: 'Iphone 15 pro max',
-      use: { ...devices['iPhone 15 Pro Max'] },
-    },
-    {
-      name:'Ipad 11 pro',
-      use: {...devices['iPad Pro 11']}
-    }
+    // // {
+    // //   name: 'Mobile Firefox',
+    // //   use: { ...devices['Pixel 5']},
+    // // },
+    // // {
+    // //   name: 'Mobile Chrome',
+    // //   use: { ...devices['Pixel 5']},
+    // // },
+    // // {
+    // //   name: 'Mobile Chrome',
+    // //   use: { ...devices['Pixel 5'] },
+    // // },
+    // {
+    //   name: 'Iphone 15 pro max',
+    //   use: { ...devices['iPhone 15 Pro Max'] },
+    // },
+    // {
+    //   name:'Ipad 11 pro',
+    //   use: {...devices['iPad Pro 11']}
+    // }
     
 
 
