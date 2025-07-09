@@ -2,7 +2,7 @@ const axios = require('axios');
 const express = require('express');
 const app = express();
 
-const GITHUB_TOKEN = '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';
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_REPO = 'saurabhgunturkar/plywright_BookCart';
 
 app.get('/trigger', async (req, res) => {
@@ -30,7 +30,7 @@ app.get('/trigger', async (req, res) => {
         }
       }
     );
-    
+
 
     res.send(`Triggered GitHub Actions for issue ${issueKey}`);
   } catch (error) {
