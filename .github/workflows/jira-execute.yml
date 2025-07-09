@@ -32,13 +32,13 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-    
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
-
+          
+      - name: Fix permissions
+        run: chmod +x node_modules/.bin/playwright
+          
       - name: Run Playwright tests
         run: npx playwright test login.spec.ts --reporter=json --output=playwright-report
-
+          
       - name: Send results to JIRA
         env:
           JIRA_URL: "https://saurabhgunturkar07.atlassian.net/"
