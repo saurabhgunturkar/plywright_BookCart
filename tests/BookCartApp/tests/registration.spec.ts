@@ -1,6 +1,6 @@
 import test, { expect } from "playwright/test";
-import { userRegistrationData } from "../../utils/faker";
 import { RegisterPage } from "../pages/registerPage";
+import { userRegistrationData } from "../utils/faker";
 
 test.describe("User Registration", () => {
     let registerPage: RegisterPage;
