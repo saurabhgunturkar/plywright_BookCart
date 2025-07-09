@@ -11,8 +11,8 @@ test.describe("User Login", async () => {
 
     test("should visible the username textfield ", async () => {
         expect(loginPage.usernameField).toBeDefined();
-        expect(await loginPage.usernameField.isVisible()).toBeTruthy();
-        expect(await loginPage.usernameField.isEnabled()).toBeTruthy();
+        expect(await loginPage.usernameField).toBeVisible({ timeout: 5000 });
+        expect(await loginPage.usernameField.isEnabled({ timeout: 5000 })).toBeTruthy();
     });
 
 });
