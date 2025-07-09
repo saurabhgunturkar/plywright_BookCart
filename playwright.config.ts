@@ -3,9 +3,9 @@ import { defineConfig, devices } from '@playwright/test';
 const baseURL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'https://bookcart.azurewebsites.net/';
 
 export default defineConfig({
-  testDir: './tests/BookCartApp/tests/login.spec.ts',
+  testDir: './tests/BookCartApp/tests/',
   fullyParallel: true,
-  globalTeardown: './tests/Utils/global-teardown.ts',
+  // globalTeardown: './tests/Utils/global-teardown.ts',
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 2 : undefined,
