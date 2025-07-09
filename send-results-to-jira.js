@@ -1,9 +1,9 @@
 const axios = require('axios');
 
-const jiraUrl = process.env.JIRA_URL;
-const jiraUser = process.env.JIRA_USER;
-const jiraApiToken = process.env.JIRA_API_TOKEN;
-const issueKey = process.env.ISSUE_KEY; // Pass this as an environment variable
+const jiraUrl = "https://saurabhgunturkar07.atlassian.net/";
+const jiraUser = "saurabhgunturkar07@gmail.com";
+const jiraApiToken = "${{secrets.JIRA_API_TOKEN}}";// Use GitHub Secrets for security
+const issueKey = process.env.ISSUE_KEY || "L1-3"; // Pass this as an environment variable
 
 async function sendResultsToJira() {
   if (!issueKey) {
