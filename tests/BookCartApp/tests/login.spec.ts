@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { LoginPage } from "../pages/loginPage";
 
-test.describe.only("User Login", async () => {
+test.describe("User Login", async () => {
     let loginPage: LoginPage;
 
     test.beforeEach(async ({ page }) => {
