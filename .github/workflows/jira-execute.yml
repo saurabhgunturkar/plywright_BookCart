@@ -1,0 +1,38 @@
+
+name: Run Playwright Tests
+
+on:
+  repository_dispatch:
+    types: [jira_trigger]
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run Playwright tests
+      - name: Run Playwright tests
+        run: npx playwright test login.spec.ts --reporter=json --output=playwright-report
+
+      # Step 5: Parse and send results to JIRA
+      - name: Send results to JIRA
+        run: node send-results-to-jira.js
+        env:
+          JIRA_URL: "https://saurabhgunturkar07.atlassian.net/"
+          JIRA_USER: "saurabhgunturkar07@gmail.com"
+          JIRA_API_TOKEN: "ATATT3xFfGF0hgw9l3_t084YaF9ERN7o6qDrRB8mxZlmP_9rhNmp_FVygNW5PYWoaQawTcU8miRp3Gr8SGXvw8JUY7LZO2DNn15uNPa0i4zfnW0ZcNQHBBWrgQ1NBNXSy3J3D9P1RHDnq3q2D7x0p10bQNHWqspcwou9pnQehWeh3ONyP8KQ4F8=C362AB9A"
+          ISSUE_KEY: ${{ github.event.client_payload.issue_key }}
