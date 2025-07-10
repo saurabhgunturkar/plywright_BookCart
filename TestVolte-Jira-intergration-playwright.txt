@@ -1,0 +1,43 @@
+🧩🧩JIRA–Playwright Integration Guide🧩🧩
+===========================================
+🎯 Objective
+Develop a solution to integrate test automation tools (e.g., Playwright, Katalon, Leapwork) with test management platforms (e.g., JIRA, Azure DevOps) to:
+
+Trigger test execution directly from JIRA or ADO.
+Automatically send test results back to the originating platform in a readable format.
+
+=======================================================================================================
+=======================================================================================================
+🧩Integration Flow  ( JIRA webhook > Middleware Server(Render) >  GitHub API > GitHub Workflow )
+===============================================
+1. Trigger from JIRA
+  - A webhook is configured in JIRA to detect status changes or custom events.
+
+2. Middleware Server (Render)
+Since JIRA webhooks don’t support payloads, a middleware server (hosted on Render) is used to:
+  - Receive the webhook from JIRA.
+  - Call the GitHub API with the required payload.
+
+3. GitHub Actions Workflow
+The GitHub workflow is triggered via the API and:
+  - Executes Playwright tests.
+  - Sends the test results back to the JIRA issue as a comment.
+=================================================================================
+
+🧩Workflow
+>>>>>> Send trigger by changing status on JIRA >> Get request to GITHUB API and run GitHub Workflow >> Send result to Jira in comment of that ISSUE
+
+=========================================================================================
+🧩 Required Components
+✅ JIRA API Token (stored in GitHub Secrets)
+✅ JIRA Issue Key (passed from the JIRA webhook payload)
+✅ JIRA URL (e.g., https://your-domain.atlassian.net)
+✅ JIRA Email (used for authentication)
+✅ GitHub API Token (classic token stored in Render environment)
+
+==========================================================================================
+🧩Related Files
+1. .github/Workflow/jira-execute.yml (GitHub Actions workflow triggered by the middleware)
+2. server.js (Middleware server to receive JIRA webhook and trigger GitHub)
+3. send-result-to-jira.js (Script to post test results back to the JIRA issue)
+

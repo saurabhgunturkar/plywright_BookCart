@@ -1,4 +1,4 @@
-name: Run Playwright Tests
+name: jira-Trigger-Integration
 
 on:
   repository_dispatch:
