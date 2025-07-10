@@ -25,7 +25,7 @@ async function sendResultsToJira() {
   };
 
   await axios.post(
-    `${jiraUrl}/rest/api/3/issue/${issueKey}/comment`,
+    `${jiraUrl}/rest/api/2/issue/${issueKey}/comment`,
     comment,
     {
       headers: {
