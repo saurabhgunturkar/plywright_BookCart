@@ -3,7 +3,9 @@ import { defineConfig, devices } from '@playwright/test';
 const baseURL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'https://bookcart.azurewebsites.net/';
 
 export default defineConfig({
-  // testDir: './tests/BookCartApp/tests/',
+  // testDir: './tests/BookCartApp/tests/',  // for jira intergration
+  // testDir: './tests/testvolte11-singlescript/', // for single script
+  // -- make headless true for CI
   testDir: './tests/testvolte11-singlescript/',
 
   fullyParallel: true,
