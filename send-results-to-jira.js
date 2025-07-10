@@ -6,7 +6,7 @@ const jiraUrl = "https://saurabhgunturkar07.atlassian.net";
 const jiraUser = "saurabhgunturkar07@gmail.com";
 const jiraApiToken = process.env.JIRA_API_TOKEN;
 const issueKey = process.env.ISSUE_KEY;
-const reportPath = "playwright-report/index.html"; // Change to your actual report file
+const reportPath = "test-results/.last-run.json"; // Change to your actual report file
 
 console.log(`🔍 Sending results to JIRA for issue ${issueKey}...`);
 console.log(`Jira token: ${jiraApiToken ? 'Provided' : 'Not provided'}`);
