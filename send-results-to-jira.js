@@ -38,7 +38,7 @@ async function sendResultsToJira() {
 }
 
 sendResultsToJira().catch((err) => {
-      console.log("Request URL:", `${jiraUrl}/rest/api/3/issue/${issueKey}/comment`);
+      console.log("Request URL:", `${jiraUrl}/rest/api/2/issue/${issueKey}/comment`);
     console.log("Auth Header:", `Basic ${auth}`);
   console.error('❌ Failed to send results to JIRA:', err.response?.data || err.message);
   process.exit(1);
