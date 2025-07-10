@@ -9,37 +9,37 @@ console.log(`ISSUE KEY = ${issueKey}`);
 
 async function sendResultsToJira() {
   if (!issueKey) {
-
     console.error('❌ ISSUE_KEY is not provided.');
-    
-
-
     process.exit(1);
   }
 
   const auth = Buffer.from(`${jiraUser}:${jiraApiToken}`).toString('base64');
+  const requestUrl = `${jiraUrl}/rest/api/2/issue/${issueKey}/comment`;
 
   const comment = {
     body: 'Test results have been updated from GitHub Actions.',
   };
 
-  await axios.post(
-    `${jiraUrl}/rest/api/2/issue/${issueKey}/comment`,
-    comment,
-    {
-      headers: {
-        Authorization: `Basic ${auth}`,
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+  try {
+    console.log("Request URL:", requestUrl);
+    console.log("Auth Header:", `Basic ${auth}`);
 
-  console.log(`✅ Test results sent to JIRA issue ${issueKey}`);
+    await axios.post(
+      requestUrl,
+      comment,
+      {
+        headers: {
+          Authorization: `Basic ${auth}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    console.log(`✅ Test results sent to JIRA issue ${issueKey}`);
+  } catch (err) {
+    console.error('❌ Failed to send results to JIRA:', err.response?.data || err.message);
+    process.exit(1);
+  }
 }
 
-sendResultsToJira().catch((err) => {
-      console.log("Request URL:", `${jiraUrl}/rest/api/2/issue/${issueKey}/comment`);
-    console.log("Auth Header:", `Basic ${auth}`);
-  console.error('❌ Failed to send results to JIRA:', err.response?.data || err.message);
-  process.exit(1);
-});
+sendResultsToJira();
