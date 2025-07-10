@@ -3,7 +3,7 @@ const axios = require('axios');
 const jiraUrl = "https://saurabhgunturkar07.atlassian.net";
 const jiraUser = "saurabhgunturkar07@gmail.com";
 const jiraApiToken = process.env.JIRA_TOKEN;
-const issueKey = "L1-3";
+const issueKey = process.env.ISSUE_KEY;
 
 async function sendResultsToJira() {
   if (!issueKey) {
