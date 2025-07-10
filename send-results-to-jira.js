@@ -8,6 +8,9 @@ const jiraApiToken = process.env.JIRA_TOKEN;
 const issueKey = process.env.ISSUE_KEY;
 const reportPath = "playwright-report/index.html"; // Change to your actual report file
 
+console.log(`🔍 Sending results to JIRA for issue ${issueKey}...`);
+console.log(`Jira token: ${jiraApiToken ? 'Provided' : 'Not provided'}`);
+
 async function sendResultsToJira() {
   if (!issueKey || !jiraApiToken) {
     console.error('❌ Missing ISSUE_KEY or JIRA_TOKEN.');
