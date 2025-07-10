@@ -5,12 +5,15 @@ const jiraUser = "saurabhgunturkar07@gmail.com";
 const jiraApiToken = process.env.JIRA_TOKEN;
 const issueKey = process.env.ISSUE_KEY;
 
+console.log(`ISSUE KEY = ${issueKey}`);
+
 async function sendResultsToJira() {
   if (!issueKey) {
+
     console.error('❌ ISSUE_KEY is not provided.');
     
-console.log("Request URL:", `${jiraUrl}/rest/api/3/issue/${issueKey}/comment`);
-console.log("Auth Header:", `Basic ${auth}`);
+    // console.log("Request URL:", `${jiraUrl}/rest/api/3/issue/${issueKey}/comment`);
+    // console.log("Auth Header:", `Basic ${auth}`);
 
     process.exit(1);
   }
