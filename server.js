@@ -2,14 +2,16 @@ const axios = require('axios');
 const express = require('express');
 const app = express();
 
+app.use(express.json()); // Important to parse JSON body
+
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_REPO = 'saurabhgunturkar/plywright_BookCart';
 
-app.get('/trigger', async (req, res) => {
-  const issueKey = req.query.issue_key;
+app.post('/trigger', async (req, res) => {
+  const issueKey = req.body.issue?.key;
 
   if (!issueKey) {
-    return res.status(400).send('Missing issue_key');
+    return res.status(400).send('Missing issue key in payload');
   }
 
   const payload = {
@@ -31,11 +33,10 @@ app.get('/trigger', async (req, res) => {
       }
     );
 
-
-    res.send(`Triggered GitHub Actions for issue ${issueKey}`);
+    res.send(`✅ Triggered GitHub Actions for issue ${issueKey}`);
   } catch (error) {
     console.error(error.response?.data || error.message);
-    res.status(500).send('Failed to trigger GitHub Actions');
+    res.status(500).send('❌ Failed to trigger GitHub Actions');
   }
 });
 
