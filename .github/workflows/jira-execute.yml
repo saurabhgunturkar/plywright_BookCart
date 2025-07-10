@@ -41,7 +41,14 @@ jobs:
         run: chmod +x node_modules/.bin/playwright
           
       - name: Run Playwright tests
-        run: npm run runtest
+        run: npx playwright test --reporter html
+
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v3
+        with:
+            name: test-report
+            path: playwright-report/
+
           
       - name: Send results to JIRA
         env:

@@ -1,41 +1,41 @@
 const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
 
 const jiraUrl = "https://saurabhgunturkar07.atlassian.net";
 const jiraUser = "saurabhgunturkar07@gmail.com";
 const jiraApiToken = process.env.JIRA_TOKEN;
 const issueKey = process.env.ISSUE_KEY;
-
-console.log(`ISSUE KEY = ${issueKey}`);
+const reportPath = "playwright-report/index.html"; // Change to your actual report file
 
 async function sendResultsToJira() {
-  if (!issueKey) {
-    console.error('❌ ISSUE_KEY is not provided.');
+  if (!issueKey || !jiraApiToken) {
+    console.error('❌ Missing ISSUE_KEY or JIRA_TOKEN.');
     process.exit(1);
   }
 
   const auth = Buffer.from(`${jiraUser}:${jiraApiToken}`).toString('base64');
   const requestUrl = `${jiraUrl}/rest/api/2/issue/${issueKey}/comment`;
 
+  let reportContent = "Test results updated.";
+  if (fs.existsSync(reportPath)) {
+    reportContent = fs.readFileSync(reportPath, "utf8");
+  }
+
   const comment = {
-    body: 'Test results have been updated from GitHub Actions.',
+    body: `🧪 **Automated Test Report** from GitHub Actions:\n\n${reportContent}`,
   };
 
   try {
-    console.log("Request URL:", requestUrl);
-    console.log("Auth Header:", `Basic ${auth}`);
+    const response = await axios.post(requestUrl, comment, {
+      headers: {
+        Authorization: `Basic ${auth}`,
+        'Content-Type': 'application/json',
+      },
+    });
 
-    await axios.post(
-      requestUrl,
-      comment,
-      {
-        headers: {
-          Authorization: `Basic ${auth}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-
-    console.log(`✅ Test results sent to JIRA issue ${issueKey}`);
+    console.log(`✅ Test report sent to JIRA issue ${issueKey}`);
+    console.log("Response:", response.data);
   } catch (err) {
     console.error('❌ Failed to send results to JIRA:', err.response?.data || err.message);
     process.exit(1);
