@@ -12,8 +12,7 @@ async function sendResultsToJira() {
 
     console.error('❌ ISSUE_KEY is not provided.');
     
-    // console.log("Request URL:", `${jiraUrl}/rest/api/3/issue/${issueKey}/comment`);
-    // console.log("Auth Header:", `Basic ${auth}`);
+
 
     process.exit(1);
   }
@@ -25,7 +24,7 @@ async function sendResultsToJira() {
   };
 
   await axios.post(
-    `${jiraUrl}/rest/api/2/issue/${issueKey}`,
+    `${jiraUrl}/rest/api/2/issue/${issueKey}/comment`,
     comment,
     {
       headers: {
@@ -39,6 +38,8 @@ async function sendResultsToJira() {
 }
 
 sendResultsToJira().catch((err) => {
+      console.log("Request URL:", `${jiraUrl}/rest/api/3/issue/${issueKey}/comment`);
+    console.log("Auth Header:", `Basic ${auth}`);
   console.error('❌ Failed to send results to JIRA:', err.response?.data || err.message);
   process.exit(1);
 });
