@@ -41,3 +41,24 @@ The GitHub workflow is triggered via the API and:
 2. server.js (Middleware server to receive JIRA webhook and trigger GitHub)
 3. send-result-to-jira.js (Script to post test results back to the JIRA issue)
 
+
+
+
+=========================================================================================================================
+=========================================================================================================================
+=========================================================================================================================
+🧩🧩TESTVOLTE 11 -> SINGLE TESTSCRIPT TO TEST MULTIREGION APPLICATION 🧩🧩
+----------------------------------------------------------------------------------
+🎯 Objective
+  
+
+Folder 
+tests/testvolte11-singlescript
+
+File Details:
+  testprofils.ts        => TestData
+  CurrencyConverter.ts  => Testscript funcation
+  Converter.spec.ts     => Loop configuration
+
+
+
