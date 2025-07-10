@@ -2,12 +2,12 @@ const axios = require('axios');
 
 const jiraUrl = "https://saurabhgunturkar07.atlassian.net";
 const jiraUser = "saurabhgunturkar07@gmail.com";
-const jiraApiToken = process.env.JIRA_TOKEN ;// Use GitHub Secrets for security
-const issueKey = process.env.ISSUE_KEY || "L1-3"; // Pass this as an environment variable
+const jiraApiToken = process.env.JIRA_TOKEN;
+const issueKey = process.env.ISSUE_KEY;
 
 async function sendResultsToJira() {
   if (!issueKey) {
-    console.error('ISSUE_KEY is not provided.');
+    console.error('❌ ISSUE_KEY is not provided.');
     process.exit(1);
   }
 
@@ -28,10 +28,10 @@ async function sendResultsToJira() {
     }
   );
 
-  console.log(`Test results sent to JIRA issue ${issueKey}`);
+  console.log(`✅ Test results sent to JIRA issue ${issueKey}`);
 }
 
 sendResultsToJira().catch((err) => {
-  console.error('Failed to send results to JIRA:', err);
+  console.error('❌ Failed to send results to JIRA:', err.response?.data || err.message);
   process.exit(1);
 });
